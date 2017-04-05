@@ -1,0 +1,179 @@
+{% extends "base.html" %}
+{% block title %}
+    {{ post[0][0].title }}
+{% endblock %}
+{% block content %}
+    <div class="site-contentnbt" id="contentnbt">
+        <div class="content-areanbt" id="primarynbt">
+            <div class="site-mainnbt" id="mainnbt" role="main">
+                <div class="mainblogsec section" id="mainblogsec">
+                    <div class="widget Blog" data-version="1" id="Blog1">
+                        <div class="blog-posts hfeed">
+                            <div class="date-outer">
+                                <div class="date-posts">
+                                    <div class="post-outer">
+                                        <article class="post hentry">
+                                            <div class="index-boxnbt">
+
+                                                <header class="entry-header">
+                                                    <h1 class="post-title entry-title" itemprop="headline">
+                                                        <a href="/post/{{ post[0][0].post_id }}">{{ post[0][0].title }}</a>
+                                                    </h1>
+                                                    <div class="entry-metanbt">
+                                                                    <span class="post-author vcard">Written by&nbsp;
+                                                                        <span class="fn" itemprop="author"
+                                                                              itemscope="itemscope">
+                                                                            <a class="g-profile" href="#" rel="author"
+                                                                               title="author profile"
+                                                                               data-gapiscan="true" data-onload="true"
+                                                                               data-gapiattached="true">
+                                                                                <span itemprop="name">{{ post[0][1].full_name }}</span>
+                                                                            </a>
+                                                                        </span>
+                                                                    </span>on <a class="timestamp-link" href="#">created
+                                                        <span class="published updated"
+                                                              itemprop="datePublished">{{ post[0][0].created.strftime('%Y/%m/%d - %H:%M') }}
+                                                                    </span>
+                                                    </a>&nbsp; in <a
+                                                            href="/category/{{ post[0][2].cat_name }}">{{ post[0][2].cat_name }}</a>&nbsp;
+                                                        with
+                                                        <a class="comment-link" href="#">
+                                                            {% if _comments %}
+                                                                {{ _comments|length }}  comments:
+                                                            {% else %} No comments
+                                                            {% endif %}                                                        </a>
+
+                                                    </div>
+                                                </header>
+
+                                                <div class="post-header-line-1">
+                                                </div>
+                                                <div class="post-body entry-content" id="post-body-3699144930898749987">
+                                                    <div dir="ltr" style="text-align: left;" trbidi="on">
+                                                        {{ post[0][0].content |safe }}
+
+                                                    </div>
+
+                                                </div>
+                                                <div class="erorr_message">
+
+                                                    {% with messages = get_flashed_messages(category_filter=["edit_post_erorr"]) %}
+                                                        {% if messages %}
+                                                            {% for message in messages %}
+                                                                <label>{{ message }}</label>
+                                                            {% endfor %}
+                                                        {% endif %}
+                                                    {% endwith %}
+                                                </div>
+                                                {% if current_user.is_authenticated %}
+                                                    {% if current_user.user_id == post[0][0].user_id %}
+                                                        <div style="float:right;padding-right:0;margin-top:15px;">
+
+                                                            <a class="readmorenbt"
+                                                               href="/post/{{ post[0][0].post_id }}/edit"
+                                                               style="margin-right:15px;">Edit</a>
+                                                            <a class="readmorenbt"
+                                                               href="/post/{{ post[0][0].post_id }}/delete">Delete</a>
+                                                        </div>
+                                                    {% endif %}
+                                                {% endif %}
+                                                <div class="related-postbwrap" id="bpostrelated-post"><h4>Related Posts
+                                                    to {{ post[0][2].cat_name }}:</h4>
+                                                    {% if related_post %}
+
+                                                        <ul class="related-post-style-3">
+                                                            {% for related in related_post %}
+                                                                <li class="related-post-item" tabindex="0">
+                                                                    <a title=""
+                                                                       href="/post/{{ related.post_id }}">{{ related.title }}</a>
+                                                                </li>
+                                                            {% endfor %}
+                                                        </ul>
+                                                    {% endif %}
+                                                </div>
+
+
+                                            </div>
+
+                                        </article>
+
+                                        <div class="blog-pager" id="blog-pager">
+                                                    <span id="blog-pager-newer-link">
+                                                        <a class="blog-pager-newer-link"
+                                                           href="/post/next/{{ post[0][0].post_id }}"
+                                                           id="Blog1_blog-pager-newer-link" title="Newer Post">Newer Post</a>
+                                                    </span>
+                                            <span id="blog-pager-older-link">
+                                                        <a class="blog-pager-older-link"
+                                                           href="/post/previous/{{ post[0][0].post_id }}"
+                                                           id="Blog1_blog-pager-older-link" title="Older Post">Older Post</a>
+                                                    </span>
+                                            <a class="home-link" href="/">Home</a>
+                                        </div>
+
+                                        <div class="comments" id="comments">
+                                            <a name="comments"></a>
+                                            <h4>
+                                                {% if _comments %}
+                                                    {{ _comments|length }}  comments:
+                                                {% else %} No comments
+                                                {% endif %}
+
+                                            </h4>
+                                            <div class="commmentsarea">
+                                                <ul>
+                                                    {% for _comment in _comments %}
+                                                        <li>
+                                                            <div>
+                                                                <cite class="user">{{ _comment[1].full_name }}</cite>
+                                                                <span>
+                                                                                    {{ _comment[0].created.strftime('%Y/%m/%d - %H:%M') }}
+                                                                                </span>
+                                                            </div>
+                                                            <p class="comment_content">{{ _comment[0].content }}
+                                                            </p>
+                                                        </li>
+                                                    {% endfor %}
+                                                </ul>
+                                            </div>
+                                            <div class="comment-form">
+                                                <a name="comment-form"></a>
+                                                <h4 id="comment-post-message">Post a Comment</h4>
+                                                {% with messages = get_flashed_messages(category_filter=["comment_erorr"]) %}
+                                                    {% if messages %}
+                                                        <label class="erorr_message">
+                                                            <ul class=flashes>
+                                                                {% for message in messages %}
+                                                                    <li>{{ message }}</li>
+                                                                {% endfor %}
+                                                            </ul>
+                                                        </label>
+                                                    {% endif %}
+                                                {% endwith %}
+                                                {% if current_user.is_authenticated %}
+                                                    <form method="post"
+                                                          action="/post/{{ post[0][0].post_id }}/newcomment">
+                                                        <textarea name="comment" class="comment"></textarea>
+                                                        <button type="submit" style="margin-top: 2em">Submit</button>
+                                                    </form>
+                                                {% else %}
+                                                    <div class="warning"> please login to start commenting</div>
+                                                {% endif %}
+                                            </div>
+
+                                            <div id="backlinks-container">
+                                                <div id="Blog1_backlinks-container">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div><!-- #main -->
+        </div><!-- #primary -->
+    </div><!-- #content -->
+{% endblock %}

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <link href='https://fonts.googleapis.com/css?family=Amatic+SC:400,700|Dosis:400,500,700&subset=latin,latin-ext'
+          rel='stylesheet' type='text/css'/>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
+    <title>Login</title>
+</head>
+<body>
+
+<div class="site-mainnbt loginform">
+    <div class="post">
+        <div class="index-boxnbt">
+            <h1 class="LoginH1">Login</h1>
+            <form method="POST">
+                <div class="container">
+                    <label><b>Username</b></label>
+                    <input class="xxxxx" type="text" placeholder="Enter Username" name="username" required>
+
+                    <label><b>Password</b></label>
+                    <input class="xxxxx" type="password" placeholder="Enter Password" name="password" required>
+
+                    <button type="submit">Login</button>
+                        <label class="erorr_message">
+                            {% with messages = get_flashed_messages(category_filter=["login_erorr"]) %}
+                                {% if messages %}
+                                    <ul class=flashes>
+                                        {% for message in messages %}
+                                            <li>{{ message }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
+                            {% endwith %}
+                        </label><br>
+                    <label>Don't Have Account?
+                        <a class="readmorenbt" href="/signup">Sign Up</a>
+                    </label>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

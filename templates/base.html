@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title> {% block title %} {% endblock %} </title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <link href='https://fonts.googleapis.com/css?family=Amatic+SC:400,700|Dosis:400,500,700&subset=latin,latin-ext'
+          rel='stylesheet' type='text/css'/>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/widgEditor.css') }}">
+    <script type="text/javascript" src="{{ url_for('static', filename='js/widgEditor.js') }}"></script>
+</head>
+<body>
+<div class="sitenbt" id="pagenbt">
+    <header class="site-headernbt" id="mastheadnbt" role="banner">
+        <div class="site-brandingnbt">
+
+            <div class="titlewrapper">
+                <h1 class="site-titlenbt">
+                    <a href="/">Muhammad Abulmagd</a>
+                </h1>
+            </div>
+            <h2 class="site-descriptionnbt">personal blog</h2>
+
+        </div><!-- .site-branding -->
+
+
+        <nav class="main-navigationnbt" id="site-navigationnbt" role="navigation">
+            <div class="menu-primary-menunbt section" id="menu-primary-menunbt">
+                <div class="widget PageList" data-version="1" id="PageList8">
+                    <div class="widget-content">
+                        <ul class="menunbt nav-menu" id="primary-menunbt" aria-expanded="false">
+                            <li><a href="/">
+                                {% if current_user.is_authenticated %}
+                                    HI {{ current_user.full_name }}
+                                {% else %}
+                                    Home
+                                {% endif %}
+
+                            </a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-socialnbt" id="menu-socialnbt">
+                <ul class="menu-itemsnbt" id="menu-social-itemsnbt">
+                    {% if current_user.is_authenticated %}
+                        <li><a href="/logout" title="logout"><img class="icon40"
+                                                                  src="{{ url_for('static', filename='img/exit.png') }}">
+                        </a></li>
+                    {% else %}
+                        <li><a href="/login" title="login"><img class="icon40"
+                                                                src="{{ url_for('static', filename='img/login.png') }}">
+                        </a></li>
+                    {% endif %}
+                    <li><a href="/new" title="Add New"><img class="icon40"
+                                                            src="{{ url_for('static', filename='img/add.png') }}"> </a>
+                    </li>
+                    <li><a href="https://twitter.com/m4bulmagd" title="Twitter"><img class="icon40"
+                                                                                     src="{{ url_for('static', filename='img/tw.png') }}">
+                    </a></li>
+                    <li><a href="https://www.facebook.com/i933k" title="Facebook"><img class="icon40"
+                                                                                       src="{{ url_for('static', filename='img/fb.png') }}">
+                    </a></li>
+                    <li><a href="https://www.linkedin.com/m4bulmagd" title="Linkedin"><img class="icon40"
+                                                                                           src="{{ url_for('static', filename='img/in.png') }}">
+                    </a></li>
+                    <li><a href="https://www.instagram.com/georgechalhoub" title="Instagram"><img class="icon40"
+                                                                                                  src="{{ url_for('static', filename='img/insta.png') }}">
+                    </a></li>
+                    <li><a href="https://www.youtube.com/" title="Youtube"><img class="icon40"
+                                                                                src="{{ url_for('static', filename='img/yt.png') }}">
+                    </a></li>
+                    <li><a href="https://github.com/m4bulmagd" title="Github"><img class="icon40"
+                                                                                   src="{{ url_for('static', filename='img/gh.png') }}">
+                    </a></li>
+                </ul>
+            </div>
+        </nav><!-- #site-navigation -->
+
+    </header>
+
+
+
+    {% block content %}
+
+
+    {% endblock %}
+
+
+    <footer class="site-footernbt" id="colophonnbt" role="contentinfo">
+        <div id="supplementarynbt">
+            <div class="footer-widgetsnbt widget-areanbt clearnbt" id="footer-widgetsnbt" role="complementary"
+                 style="width: 800px;height: 330px;position: relative;">
+                <div class="sidebarwidgetsarea section" id="sidebarwidgetsarea">
+                    <div class="widget PopularPosts" data-version="1" id="PopularPosts1">
+                        <h2>Popular Posts</h2>
+                        <div class="widget-content popular-posts">
+                            <ul>
+                                {% for ppost in popular %}
+                                    <li>
+                                        <a href="/post/{{ ppost.post_id }}">{{ ppost.title }}</a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="widget Label" data-version="1" id="Label1"
+                         style="position: absolute; left: 400px; top: 20px;">
+                        <h2>Categories</h2>
+                        <div class="widget-content list-label-widget-content">
+                            <ul>
+                                {% for cat in categories %}
+                                    <li>
+                                        <a dir="ltr" href="/category/{{ cat.cat_name }}">{{ cat.cat_name }}</a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- #footer-sidebar -->
+        </div><!-- #supplementary -->
+        <div class="site-infonbt">
+            Copyright © 2017
+            <a href="/">Muhammad Abulmagd
+            </a>
+            | Proudly Powered by
+            <a href="#">Me
+            </a>
+        </div><!-- .site-info -->
+    </footer><!-- #colophon -->
+</div><!-- #page -->
+</body>
+</html>

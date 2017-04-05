@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
+    <link href='https://fonts.googleapis.com/css?family=Amatic+SC:400,700|Dosis:400,500,700&subset=latin,latin-ext'
+          rel='stylesheet' type='text/css'/>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
+    <title>Sign up</title>
+</head>
+<body>
+
+<div class="site-mainnbt loginform">
+    <div class="post">
+        <div class="index-boxnbt">
+            <h1 class="LoginH1"> Signup</h1>
+            <form method="POST">
+                <div class="container">
+                    <label><b>Username</b></label>
+                    <input class="xxxxx" type="text" placeholder="Enter Username" name="username" required>
+                    <label><b>Full Name</b></label>
+                    <input class="xxxxx" type="text" placeholder="Enter Full Name" name="fullname" required>
+                    <label><b>Password</b></label>
+                    <input class="xxxxx" type="password" placeholder="Enter Password" name="password" required>
+
+                    <button type="submit">Sign Up</button>
+                    <label class="erorr_message" >
+
+                        {% with messages = get_flashed_messages(category_filter=["signup_erorr"]) %}
+                                {% if messages %}
+
+                                        {% for message in messages %}
+                                            <label>{{ message }}</label>
+                                        {% endfor %}
+
+                                {% endif %}
+                            {% endwith %}
+                    </label><br>
+                    <label>Already have an Account?
+                        <a class="readmorenbt" href="/login">login</a>
+                    </label>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
