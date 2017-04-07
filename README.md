@@ -1,2 +1,2 @@
 # Flask-blog
-Simple Blog built by Flask and Postgresql
+Simple Blog built using Flask and Postgresql
