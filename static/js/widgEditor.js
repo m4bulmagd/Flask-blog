@@ -1,92 +1,3 @@
-/*
-**    File: widgEdit.js
-**    Created by: Cameron Adams (http://www.themaninblue.com/)
-**    Created on: 2005-01-16
-**    Last modified: 2008-03-01
-**
-**
-**
-**
-**    License Information:
-**    -------------------------------------------------------------------------
-**    Copyright (C) 2008 Cameron Adams
-**
-**    This program is free software; you can redistribute it and/or modify it
-**    under the terms of the GNU General Public License as published by the
-**    Free Software Foundation; either version 2 of the License, or (at your
-**    option) any later version.
-**    
-**    This program is distributed in the hope that it will be useful, but
-**    WITHOUT ANY WARRANTY; without even the implied warranty of
-**    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
-**    General Public License for more details.
-**    
-**    You should have received a copy of the GNU General Public License along
-**    with this program; if not, write to the Free Software Foundation, Inc.,
-**    59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
-**    
-**    
-**    
-**    
-**    Purpose:
-**    -------------------------------------------------------------------------
-**
-**    Replaces all textareas (class="widgEditor") in a HTML document with
-**    enhanced editing windows to allow basic HTML formatting in a WYSIWYG
-**    manner.
-**
-**
-**
-**
-**    Function list:
-**    -------------------------------------------------------------------------
-**
-**    run()
-**
-**    widgInit()
-**
-**    widgEditor(replacedTextareaID)
-**    widtEditor.cleanPaste()
-**    widgEditor.cleanSource()
-**    widgEditor.convertSPANs(theSwitch)
-**    widgEditor.detectPaste(e)
-**    widgEditor.initEdit()
-**    widgEditor.insertNewParagraph()
-**    widgEditor.modifyFormSubmit()
-**    widgEditor.paragraphise()
-**    widgEditor.refreshDisplay()
-**    widgEditor.switchMode()
-**    widgEditor.updateWidgInput()
-**    widgEditor.writeDocument()
-**
-**    widgToolbar()
-**    widgToolbar.addButton(theID, theClass, theLabel, theAction)
-**    widgToolbar.addSelect(theID, theClass, theContentArray, theAction)
-**    widgToolbar.disable()
-**    widgToolbar.enable()
-**    widgToolbar.setState(theState, theStatus)
-**
-**    widgToolbarAction()
-**
-**    widgToolbarCheckState(theWidgEditor, resubmit)
-**
-**    widgToolbarMouseover()
-**
-**    acceptableChildren(theNode)
-**
-**    changeNodeType(theNode, nodeType)
-**
-**    replaceNodeWithChildren()
-**
-**    String.addClass(theClass)
-**    String.classExists(theClass)
-**    String.isAcceptedElementName()
-**    String.isInlineName()
-**    String.removeClass(theClass)
-**    String.reverse()
-**    String.validTags()
-*/
-
 
 
 
@@ -106,34 +17,14 @@ widgToolbarItems.push("hyperlink");
 widgToolbarItems.push("unorderedlist");
 widgToolbarItems.push("orderedlist");
 
-/* Options on block format select element. Consists of string pairs (option value, option label) */
-
-/* If widgInsertParagraphs = true, when content is submitted paragraphs will be
-** inserted around text without a parent element. Mozilla does not
-** automatically do this, so if this is set to false you will end up with some
-** plain text blocks. Uses a double <br /> as a pargraph marker.
-*/
-
 var widgInsertParagraphs = true;
-
-/* If widgAutoClean = true, when content is pasted into the WYSIWYG view, it
-** will automatically be cleaned. If widgAutoClean = false, the user will be
-** prompted as to whether they wish to clean the content.
-*/
 
 var widgAutoClean = false;
 
 /******************************************************************************
 **    END CONFIGURATION
 ******************************************************************************/
-
-
-
-
 run();
-
-
-
 
 function run()
 {
