@@ -12,8 +12,8 @@ from flask_login import LoginManager
 
 app = Flask(__name__)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://m4bulmagd:123@localhost/personalblog'
-app.secret_key="dsfaskjgjfdhjkl"
+app.config['SQLALCHEMY_DATABASE_URI'] = 'PostgreSQl Data Base Url'
+app.secret_key="YourSecretKeyHere"
 engine = create_engine(app.config["SQLALCHEMY_DATABASE_URI"])
 Session = sessionmaker(bind=engine)
 session = Session()
