@@ -2,7 +2,6 @@ from index import app ,session
 from models import Users
 from flask_login import LoginManager
 
-print("login")
 login_manager = LoginManager()
 login_manager.init_app(app)
 
